@@ -13,7 +13,7 @@ public class MathManager extends HttpServlet {
 		
 		area = Math.PI * Math.pow(radius, 2);
 		
-		resp.getWriter().println("1. Area of circle with radius " + radius + " is: " + area + " square­cm");
+		resp.getWriter().println("1. Area of circle with radius " + radius + " is: " + area + " square­cm \n");
 		
 		double angleB = 30;
 		double hypotenuse = 50;
@@ -22,14 +22,14 @@ public class MathManager extends HttpServlet {
 		
 		radian = Math.toRadians(angleB);
 		opposite = Math.sin(radian) * hypotenuse;
-		resp.getWriter().println("2. Length of opposite where angle B is 30 degrees and Hypotenuse length is 50 cm is: " + opposite);
+		resp.getWriter().println("22. Length of opposite where angle B is 30 degrees and Hypotenuse length is 50 cm is: " + opposite + "\n");
 		
 		double base = 20;
 		double exp = 13;
 		double result;
 		
 		result = Math.pow(base, exp);
-		resp.getWriter().println("3. Power of 20 with exp of 13 is: " + result);
+		resp.getWriter().println("3. Power of 20 with exp of 13 is: " + result + "\n");
 		
 	}
 }
