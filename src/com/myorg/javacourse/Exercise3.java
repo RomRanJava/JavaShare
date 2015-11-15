@@ -22,7 +22,7 @@ public class Exercise3 extends HttpServlet {
 		
 		radian = Math.toRadians(angleB);
 		opposite = Math.sin(radian) * hypotenuse;
-		resp.getWriter().println("22. Length of opposite where angle B is 30 degrees and Hypotenuse length is 50 cm is: " + opposite + "\n");
+		resp.getWriter().println("2. Length of opposite where angle B is 30 degrees and Hypotenuse length is 50 cm is: " + opposite + "\n");
 		
 		double base = 20;
 		double exp = 13;
