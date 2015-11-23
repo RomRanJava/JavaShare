@@ -30,7 +30,7 @@ public class MathManager {
 			
 			String line1 = new String("calculation 1: Area of circle with radius " + radius + " is: " + MathManager.calcCircleArea() + " square­cm.");
 			String line2 = new String("calculation 2: Length of opposite where angle B is " + angleB + " degrees and Hypotenuse length is " + hypotenuse + " cm is: " + MathManager.lengthOfOppositeTriangle() + " cm.");
-			String line3 = new String("calculation 3:: Power of " + base + " with exp of " + exp + " is " + MathManager.calcPower() + ".");
+			String line3 = new String("calculation 3: Power of " + base + " with exp of " + exp + " is " + MathManager.calcPower() + ".");
 			
 			String resultStr = line1 + "<br><br>" + line2 + "<br><br>" + line3;			
 			
