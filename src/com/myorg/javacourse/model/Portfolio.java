@@ -14,8 +14,11 @@ public class Portfolio {
 	
 	public void addStock (Stock stock){
 		
-		this.stocks[portfolioSize] = stock;
-		portfolioSize++;
+		if (portfolioSize < MAX_PORTFOLIO_SIZE)
+		{
+			this.stocks[portfolioSize] = stock;
+			portfolioSize++;
+		}
 	}
 	
 	public Stock[] getStocks (){

@@ -16,7 +16,6 @@ public class PortfolioManager {
 		portfolio.addStock(stock2);
 		Stock stock3 = new Stock ("CAAS", new Date ("11/15/2014"), 32.2f , 31.5f);
 		portfolio.addStock(stock3);
-		
 		return portfolio;
 	}
 
