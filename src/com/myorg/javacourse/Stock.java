@@ -6,6 +6,8 @@ public class Stock {
 
 	private String symbol;
 	private float ask, bid;
+	private int recommendation, stockQuantity;
+	private static final int BUY = 0, SELL=1, REMOVE=2, HOLD=3;
 	
 	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 	Date d = new Date();
@@ -44,6 +46,22 @@ public class Stock {
 		this.bid = bid;
 	}
 	
+	public int getRecommendation() {
+		return recommendation;
+	}
+
+	public void setRecommendation(int recommendation) {
+		this.recommendation = recommendation;
+	}
+
+	public int getStockQuantity() {
+		return stockQuantity;
+	}
+
+	public void setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
+	}
+
 	public String getHtmlDescription(){
 		
 		String stringStr = ("<b>Stock symbol</b>:" + getSymbol() + "," + "<b> ask</b>:" + getAsk()
