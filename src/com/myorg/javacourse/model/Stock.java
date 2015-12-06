@@ -75,8 +75,7 @@ public class Stock {
 		this.stockQuantity = stockQuantity;
 	}
 
-	public String getHtmlDescription(){
-		
+	public String getHtmlDescription(){		
 		String stringStr = ("<b>Stock symbol</b>:" + getSymbol() + "," + "<b> ask</b>:" + getAsk()
 						+ ","  + "<b> bid</b>:" + getBid() + ","  + "<b> date</b>:" + df.format(getDate()));
 				

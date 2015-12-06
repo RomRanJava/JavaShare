@@ -66,12 +66,9 @@ public class Portfolio {
 		}
 	}
 	
-	public Stock[] getStocks (){
-		
+	public Stock[] getStocks (){		
 		return this.stocks;
-	}
-	
-	
+	}	
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -86,16 +83,11 @@ public class Portfolio {
 
 	public String getHtmlString(){
 		
-		String str = "<h1>"  + this.title + "</h1>";
-		
+		String str = "<h1>"  + this.title + "</h1>";	
 		for(int i = 0; i < portfolioSize; i++)
 		{
 			str = str +"<br>"+this.stocks[i].getHtmlDescription();
 		}
-		return str;
-		
+		return str;	
 	}
-	
-	
-	
 }
