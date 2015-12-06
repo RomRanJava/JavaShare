@@ -21,6 +21,24 @@ public class Portfolio {
 		}
 		this.portfolioSize = portfolio.getPortfolioSize();
 	}
+	
+	public void removeFirstStock(){
+		if(getPortfolioSize()>0)
+		{
+			for (int i = 0; i < getPortfolioSize()-1; i++)
+			{
+				this.stocks[i] = this.stocks[i+1];
+			}
+			this.portfolioSize--;
+		}
+	}
+	
+	public void changeLastStockBid(float number){
+		if(getPortfolioSize()>0)
+		{
+			this.stocks[getPortfolioSize()-1].setBid(number);
+		}
+	}
 	public void addStock (Stock stock){
 		
 		if (portfolioSize < MAX_PORTFOLIO_SIZE)

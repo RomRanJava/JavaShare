@@ -13,9 +13,13 @@ import com.myorg.javacourse.service.PortfolioManager;
 			
 			resp.setContentType("text/html");
 			PortfolioManager portfolioManager = new PortfolioManager();
-			Portfolio portfolio = portfolioManager.getPortfolio();
-			Portfolio portfolio2 = new Portfolio(portfolio);
+			Portfolio portfolio1 = portfolioManager.getPortfolio();
+			Portfolio portfolio2 = new Portfolio(portfolio1);
 			portfolio2.setTitle("Portfolio #2");
-			resp.getWriter().println(portfolio.getHtmlString() + "<br><br>" + portfolio2.getHtmlString());
+			resp.getWriter().println(portfolio1.getHtmlString() + "<br><br>" + portfolio2.getHtmlString());
+			portfolio1.removeFirstStock();
+			resp.getWriter().println(portfolio1.getHtmlString() + "<br><br>" + portfolio2.getHtmlString());
+			portfolio2.changeLastStockBid(55.55f);
+			resp.getWriter().println(portfolio1.getHtmlString() + "<br><br>" + portfolio2.getHtmlString());
 		}
 	}
