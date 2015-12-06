@@ -1,7 +1,9 @@
-package com.myorg.javacourse;
+package com.myorg.javacourse.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * This class represent all values of a specipic stock.
+ */
 public class Stock {
 
 	private String symbol;
@@ -11,7 +13,9 @@ public class Stock {
 	
 	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 	Date date = new Date();
-	
+	/**
+	 * a consturctor that create stock instens after getting the values  
+	 */
 	public Stock(String symbolSource, Date dateSource, float askVal, float bidVal) {
 		setSymbol(symbolSource);
 		setDate(dateSource);

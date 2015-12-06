@@ -1,11 +1,17 @@
 package com.myorg.javacourse.service;
 import java.util.Date;
 
-import com.myorg.javacourse.Stock;
 import com.myorg.javacourse.model.Portfolio;
+import com.myorg.javacourse.model.Stock;
 
+/**
+ * This class generate new portfolio and adding some stocks and their values by using method getPortfolio.  
+ */
 public class PortfolioManager {
-	
+	/**
+	 * This method generate new portfolio and adding some stocks and their values and then return 
+	 * the portfolio.  
+	 */
 	public Portfolio getPortfolio(){
 		
 		Portfolio portfolio = new Portfolio();

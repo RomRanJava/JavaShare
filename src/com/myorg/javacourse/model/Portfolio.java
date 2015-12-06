@@ -1,6 +1,9 @@
 package com.myorg.javacourse.model;
 import com.myorg.javacourse.*;
-
+/**
+ * class which hold some stocks and their values.
+ *
+ */
 public class Portfolio {
 
 	private final static int MAX_PORTFOLIO_SIZE = 5;
@@ -21,7 +24,12 @@ public class Portfolio {
 		}
 		this.portfolioSize = portfolio.getPortfolioSize();
 	}
-	
+	/**
+	 * This method remove the first stock in the portfolio.
+	 * The method checks if the portfolio is not empty, then the method remove the first stock
+	 * by overwriting his place with the next stock after him.
+	 * If the portfolio is empty, the method does nothing.
+	 */
 	public void removeFirstStock(){
 		if(getPortfolioSize()>0)
 		{
@@ -32,13 +40,23 @@ public class Portfolio {
 			this.portfolioSize--;
 		}
 	}
-	
+	/**
+	 * This method change the bid's value of the last stock in the portfolio.
+	 * The method checks if the portfolio is not empty, then the method change
+	 * the bid's value of the last stock.
+	 * If the portfolio is empty, the method does nothing.
+	 */
 	public void changeLastStockBid(float number){
 		if(getPortfolioSize()>0)
 		{
 			this.stocks[getPortfolioSize()-1].setBid(number);
 		}
 	}
+	/**
+	 * This method add new stock to the portfolio.
+	 * The method check if there is space in the portfolio to add another
+	 * stock, then it adds the stock to the end of the portfolio and increase the portfolio size by 1.
+	 */
 	public void addStock (Stock stock){
 		
 		if (portfolioSize < MAX_PORTFOLIO_SIZE)
