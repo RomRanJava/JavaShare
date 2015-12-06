@@ -10,21 +10,30 @@ public class Stock {
 	private static final int BUY = 0, SELL=1, REMOVE=2, HOLD=3;
 	
 	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-	Date d = new Date();
+	Date date = new Date();
 	
 	public Stock(String symbolSource, Date dateSource, float askVal, float bidVal) {
 		setSymbol(symbolSource);
-		setD(dateSource);
+		setDate(dateSource);
 		setAsk(askVal);
 		setBid(bidVal);
 	}
-
-	public Date getD() {
-		return d;
+	
+	public Stock(Stock stock){
+		this.symbol = stock.getSymbol();
+		this.ask = stock.getAsk();
+		this.bid = stock.getBid();
+		this.date = new Date(stock.getDate().getTime());
+		this.recommendation = stock.getRecommendation();
+		this.stockQuantity = stock.getStockQuantity();
 	}
 
-	public void setD(Date d) {
-		this.d = d;
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getSymbol() {
@@ -65,7 +74,7 @@ public class Stock {
 	public String getHtmlDescription(){
 		
 		String stringStr = ("<b>Stock symbol</b>:" + getSymbol() + "," + "<b> ask</b>:" + getAsk()
-						+ ","  + "<b> bid</b>:" + getBid() + ","  + "<b> date</b>:" + df.format(getD()));
+						+ ","  + "<b> bid</b>:" + getBid() + ","  + "<b> date</b>:" + df.format(getDate()));
 				
 		return stringStr;
 	}

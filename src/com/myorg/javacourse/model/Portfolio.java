@@ -12,6 +12,15 @@ public class Portfolio {
 		this.stocks = new Stock[MAX_PORTFOLIO_SIZE];
 	}
 	
+	public Portfolio(Portfolio portfolio){
+		
+		this.title = portfolio.getTitle();
+		this.stocks = new Stock[MAX_PORTFOLIO_SIZE];
+		for(int i= 0; i < portfolio.portfolioSize; i++){
+			this.stocks[i] = new Stock(portfolio.stocks[i]);
+		}
+		this.portfolioSize = portfolio.getPortfolioSize();
+	}
 	public void addStock (Stock stock){
 		
 		if (portfolioSize < MAX_PORTFOLIO_SIZE)
@@ -29,6 +38,14 @@ public class Portfolio {
 	
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public int getPortfolioSize() {
+		return portfolioSize;
 	}
 
 	public String getHtmlString(){
