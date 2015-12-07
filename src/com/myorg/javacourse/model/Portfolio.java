@@ -25,8 +25,8 @@ public class Portfolio {
 		this.portfolioSize = portfolio.getPortfolioSize();
 	}
 	/**
-	 * This method remove the first stock in the portfolio.
-	 * The method checks if the portfolio is not empty, then the method remove the first stock
+	 * This method removes the first stock in the portfolio.
+	 * The method checks if the portfolio is not empty, then the method removes the first stock
 	 * by overwriting his place with the next stock after him.
 	 * If the portfolio is empty, the method does nothing.
 	 */
@@ -41,7 +41,7 @@ public class Portfolio {
 		}
 	}
 	/**
-	 * This method change the bid's value of the last stock in the portfolio.
+	 * This method changes the bid's value of the last stock in the portfolio.
 	 * The method checks if the portfolio is not empty, then the method change
 	 * the bid's value of the last stock.
 	 * If the portfolio is empty, the method does nothing.
