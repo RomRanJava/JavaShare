@@ -1,5 +1,9 @@
 package com.myorg.javacourse.model;
+import com.myorg.javacourse.model.Portfolio;
+import com.myorg.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
+
 import java.text.SimpleDateFormat;
+import com.myorg.javacourse.model.Portfolio;
 import java.util.Date;
 /**
  * This class represent all values of a specipic stock.
@@ -8,13 +12,18 @@ public class Stock {
 
 	private String symbol;
 	private float ask, bid;
-	private int recommendation, stockQuantity;
-	private static final int BUY = 0, SELL=1, REMOVE=2, HOLD=3;
+	private int stockQuantity;
+	private ALGO_RECOMMENDATION recommendation;
 	
 	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 	Date date = new Date();
 	/**
 	 * a consturctor that create stock instens after getting the values  
+	 * 
+	 * @param symbolSource
+	 * @param dateSource
+	 * @param askVal
+	 * @param bidVal
 	 */
 	public Stock(String symbolSource, Date dateSource, float askVal, float bidVal) {
 		setSymbol(symbolSource);
@@ -59,11 +68,11 @@ public class Stock {
 		this.bid = bid;
 	}
 	
-	public int getRecommendation() {
+	public ALGO_RECOMMENDATION getRecommendation() {
 		return recommendation;
 	}
 
-	public void setRecommendation(int recommendation) {
+	public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
 		this.recommendation = recommendation;
 	}
 
@@ -77,7 +86,7 @@ public class Stock {
 
 	public String getHtmlDescription(){		
 		String stringStr = ("<b>Stock symbol</b>:" + getSymbol() + "," + "<b> ask</b>:" + getAsk()
-						+ ","  + "<b> bid</b>:" + getBid() + ","  + "<b> date</b>:" + df.format(getDate()));
+						+ ","  + "<b> bid</b>:" + getBid() + ","  + "<b> date</b>:" + df.format(getDate()) + "<b> Stock quantity</b>:" + getStockQuantity());
 				
 		return stringStr;
 	}
