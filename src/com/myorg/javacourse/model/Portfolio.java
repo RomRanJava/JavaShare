@@ -7,16 +7,12 @@ import com.myorg.javacourse.*;
  */
 public class Portfolio {
 
+	public enum ALGO_RECOMMENDATION { BUY, SELL, REMOVE, HOLD};
 	private final static int MAX_PORTFOLIO_SIZE = 5;
 	private String title;
 	private Stock[] stocks;
 	private int portfolioSize;
 	private float balance;
-	public enum ALGO_RECOMMENDATION { BUY, SELL, REMOVE, HOLD};
-	
-	public Portfolio(){
-		this.stocks = new Stock[MAX_PORTFOLIO_SIZE];
-	}
 	
 	public Portfolio(Portfolio portfolio){
 		
@@ -27,6 +23,11 @@ public class Portfolio {
 		}
 		this.portfolioSize = portfolio.getPortfolioSize();
 	}
+	
+	public Portfolio(){
+		this.stocks = new Stock[MAX_PORTFOLIO_SIZE];
+	}
+	
 	/**
 	 * This method removes the first stock in the portfolio.
 	 * The method checks if the portfolio is not empty, then the method removes the first stock
