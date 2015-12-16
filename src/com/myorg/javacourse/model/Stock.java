@@ -26,20 +26,17 @@ public class Stock {
 	 * @param bidVal
 	 */
 	
-	public Stock(Stock stock){
-		this.symbol = stock.getSymbol();
-		this.ask = stock.getAsk();
-		this.bid = stock.getBid();
-		this.date = new Date(stock.getDate().getTime());
-		this.recommendation = stock.getRecommendation();
-		this.stockQuantity = stock.getStockQuantity();
+	public Stock(String symbol, float ask, float bid){
+		this.symbol=symbol;
+		this.ask=ask;
+		this.bid=bid;
 	}
 	
-	public Stock(String symbolSource, Date dateSource, float askVal, float bidVal) {
-		setSymbol(symbolSource);
-		setDate(dateSource);
-		setAsk(askVal);
-		setBid(bidVal);
+	public Stock(Stock stock){
+		this(stock.getSymbol(),stock.getAsk(),stock.getBid());
+		this.date=new Date(stock.getDate().getTime());
+		this.recommendation=stock.recommendation;
+		this.stockQuantity=stock.stockQuantity;
 	}
 
 	public Date getDate() {

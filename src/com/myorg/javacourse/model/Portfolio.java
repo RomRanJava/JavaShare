@@ -14,18 +14,17 @@ public class Portfolio {
 	private int portfolioSize;
 	private float balance;
 	
-	public Portfolio(Portfolio portfolio){
-		
-		this.title = portfolio.getTitle();
-		this.stocks = new Stock[MAX_PORTFOLIO_SIZE];
-		for(int i= 0; i < portfolio.portfolioSize; i++){
-			this.stocks[i] = new Stock(portfolio.stocks[i]);
-		}
-		this.portfolioSize = portfolio.getPortfolioSize();
+	public Portfolio(String title){
+		this.title=title;
+		this.stocks=new Stock[MAX_PORTFOLIO_SIZE];
 	}
 	
-	public Portfolio(){
-		this.stocks = new Stock[MAX_PORTFOLIO_SIZE];
+	public Portfolio(Portfolio portfolio){
+		this(portfolio.getTitle());
+		this.portfolioSize=portfolio.getPortfolioSize();
+		for(int i=0; i<this.getPortfolioSize();i++){
+			this.stocks[i]=new Stock(portfolio.stocks[i]);
+		}
 	}
 	
 	/**
