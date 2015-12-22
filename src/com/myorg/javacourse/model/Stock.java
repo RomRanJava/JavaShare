@@ -5,10 +5,12 @@ import com.myorg.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 import java.text.SimpleDateFormat;
 import com.myorg.javacourse.model.Portfolio;
 import java.util.Date;
+
+import org.algo.model.StockInterface;
 /**
  * This class represent all values of a specipic stock.
  */
-public class Stock {
+public class Stock implements StockInterface {
 
 	private String symbol;
 	private float ask, bid;
@@ -32,11 +34,11 @@ public class Stock {
 		this.bid=bid;
 	}
 	
-	public Stock(Stock stock){
-		this(stock.getSymbol(),stock.getAsk(),stock.getBid());
-		this.date=new Date(stock.getDate().getTime());
-		this.recommendation=stock.recommendation;
-		this.stockQuantity=stock.stockQuantity;
+	public Stock(StockInterface stocks){
+		this(stocks.getSymbol(),stocks.getAsk(),stocks.getBid());
+		this.date=new Date(stocks.getDate().getTime());
+		this.recommendation=((Stock)stocks).recommendation;
+		this.stockQuantity=((Stock)stocks).stockQuantity;
 	}
 
 	public Date getDate() {

@@ -1,16 +1,19 @@
 package com.myorg.javacourse.model;
+import org.algo.model.PortfolioInterface;
+import org.algo.model.StockInterface;
+
 import com.myorg.javacourse.*;
 /**
  * class which hold some stocks and their values.
  *
  * @author Rom Vahav
  */
-public class Portfolio {
+public class Portfolio implements PortfolioInterface {
 
 	public enum ALGO_RECOMMENDATION { BUY, SELL, REMOVE, HOLD};
 	private final static int MAX_PORTFOLIO_SIZE = 5;
 	private String title;
-	private Stock[] stocks;
+	private StockInterface[] stocks;
 	private int portfolioSize;
 	private float balance;
 	
@@ -27,6 +30,16 @@ public class Portfolio {
 		}
 	}
 	
+	public Portfolio() {
+		this.stocks=new Stock[MAX_PORTFOLIO_SIZE];
+	}
+
+	public Portfolio(Stock[] stockArray) {
+		for (int i = 0; i < MAX_PORTFOLIO_SIZE; i++){
+			this.stocks[i] = stockArray[i];	
+		}
+	}
+
 	/**
 	 * This method removes the first stock in the portfolio.
 	 * The method checks if the portfolio is not empty, then the method removes the first stock
@@ -54,7 +67,7 @@ public class Portfolio {
 	public void changeLastStockBid(float number){
 		if(getPortfolioSize()>0)
 		{
-			this.stocks[getPortfolioSize()-1].setBid(number);
+			((Stock) this.stocks[getPortfolioSize()-1]).setBid(number);
 		}
 	}
 	/**
@@ -72,7 +85,7 @@ public class Portfolio {
 				}
 			}
 			this.stocks[getPortfolioSize()] = stock;
-			this.stocks[getPortfolioSize()].setStockQuantity(0);
+			((Stock) this.stocks[getPortfolioSize()]).setStockQuantity(0);
 			this.portfolioSize++;
 		}
 		else
@@ -80,7 +93,7 @@ public class Portfolio {
 	}
 	
 	public Stock[] getStocks (){		
-		return this.stocks;
+		return (Stock[]) this.stocks;
 	}
 	
 	public void setTitle(String title) {
@@ -148,16 +161,16 @@ public class Portfolio {
 					return false;
 				}
 				else if (quantity == -1){
-					this.updateBalance(stocks[i].getStockQuantity() * stocks[i].getBid());
-					this.stocks[i].setStockQuantity(0);
+					this.updateBalance(((Stock) stocks[i]).getStockQuantity() * stocks[i].getBid());
+					((Stock) this.stocks[i]).setStockQuantity(0);
 					return true;
 				}
-				else if(this.stocks[i].getStockQuantity() >= quantity){
-					this.updateBalance(stocks[i].getStockQuantity() * stocks[i].getBid());
-					this.stocks[i].setStockQuantity(this.stocks[i].getStockQuantity() - quantity);
+				else if(((Stock) this.stocks[i]).getStockQuantity() >= quantity){
+					this.updateBalance(((Stock) stocks[i]).getStockQuantity() * stocks[i].getBid());
+					((Stock) this.stocks[i]).setStockQuantity(((Stock) this.stocks[i]).getStockQuantity() - quantity);
 					return true;
 				}
-				else if(this.stocks[i].getStockQuantity() < quantity){
+				else if(((Stock) this.stocks[i]).getStockQuantity() < quantity){
 					System.out.println("Not enough stocks to sell");
 					return false;
 				}
@@ -191,13 +204,13 @@ public class Portfolio {
 			{
 				if(this.stocks[i].getSymbol() == stock.getSymbol()){
 					if (quantity == -1){
-						this.stocks[i].setStockQuantity(this.stocks[i].getStockQuantity()+ maxQuantity);
+						((Stock) this.stocks[i]).setStockQuantity(((Stock) this.stocks[i]).getStockQuantity()+ maxQuantity);
 						this.updateBalance(-(maxQuantity*stock.getAsk()));
 						return true;
 						}
 					else
 					{
-						this.stocks[i].setStockQuantity(this.stocks[i].getStockQuantity()+ quantity);
+						((Stock) this.stocks[i]).setStockQuantity(((Stock) this.stocks[i]).getStockQuantity()+ quantity);
 						this.updateBalance(-(quantity*stock.getAsk()));
 						return true;
 					}
@@ -205,12 +218,12 @@ public class Portfolio {
 			}
 			this.addStock(stock);
 			if (quantity == -1){
-				this.stocks[this.getPortfolioSize()-1].setStockQuantity(maxQuantity);
+				((Stock) this.stocks[this.getPortfolioSize()-1]).setStockQuantity(maxQuantity);
 				this.updateBalance(-(maxQuantity*stock.getAsk()));
 				return true;
 				}
 			else{
-				this.stocks[this.getPortfolioSize()-1].setStockQuantity(quantity);
+				((Stock) this.stocks[this.getPortfolioSize()-1]).setStockQuantity(quantity);
 				this.updateBalance(-(quantity*stock.getAsk()));
 				return true;
 				}
@@ -221,7 +234,7 @@ public class Portfolio {
 		float totalStocksValue = 0;
 		for (int i = 0; i<this.getPortfolioSize(); i++)
 		{
-			totalStocksValue += (this.stocks[i].getStockQuantity() * this.stocks[i].getBid());
+			totalStocksValue += (((Stock) this.stocks[i]).getStockQuantity() * this.stocks[i].getBid());
 		}
 		return totalStocksValue;
 	}
@@ -241,9 +254,25 @@ public class Portfolio {
 		String totalPortfolioValue;
 		for(int i = 0; i < portfolioSize; i++)
 		{
-			stocksDetails = stocksDetails +"<br>"+this.stocks[i].getHtmlDescription();
+			stocksDetails = stocksDetails +"<br>"+((Stock) this.stocks[i]).getHtmlDescription();
 		}
 		totalPortfolioValue = this.getTotalValue() + "$ Total Stocks value:" + this.getStocksValue() + "$ Balance:" + this.getBalance() + "$";
 		return (portfolioTitle + "<br><br>" + "Total Portfolio Value:" + totalPortfolioValue + "<br><br>" + stocksDetails);	
 	}
+
+	public static int getMaxSize() {
+		return MAX_PORTFOLIO_SIZE;
+	}
+
+	public StockInterface findStock(String symbol) {	
+		for (int i = 0; i< this.getPortfolioSize(); i++){
+			
+			if (this.stocks[i].getSymbol() == symbol)
+			{
+				return this.stocks[i];
+			}
+		}
+		return null;
+	}
+
 }
