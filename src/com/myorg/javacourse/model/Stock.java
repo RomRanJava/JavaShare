@@ -20,7 +20,7 @@ public class Stock implements StockInterface {
 	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 	Date date = new Date();
 	/**
-	 * a consturctor that create stock instens after getting the values  
+	 * a constructor that create stock instens after getting the values  
 	 * 
 	 * @param symbolSource
 	 * @param dateSource
@@ -34,11 +34,14 @@ public class Stock implements StockInterface {
 		this.bid=bid;
 	}
 	
-	public Stock(StockInterface stocks){
-		this(stocks.getSymbol(),stocks.getAsk(),stocks.getBid());
-		this.date=new Date(stocks.getDate().getTime());
-		this.recommendation=((Stock)stocks).recommendation;
-		this.stockQuantity=((Stock)stocks).stockQuantity;
+	public Stock(Stock stock){
+		this(stock.getSymbol(),stock.getAsk(),stock.getBid());
+		this.date=new Date(stock.getDate().getTime());
+		this.recommendation= stock.recommendation;
+		this.stockQuantity= stock.stockQuantity;
+	}
+
+	public Stock() {
 	}
 
 	public Date getDate() {

@@ -158,13 +158,14 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	 * @return Stock
 	 */
 	private Stock fromDto(StockDto stockDto) {
-		Stock newStock = new Stock(stockDto);
+		Stock newStock = new Stock();
 
 		newStock.setSymbol(stockDto.getSymbol());
 		newStock.setAsk(stockDto.getAsk());
 		newStock.setBid(stockDto.getBid());
 		newStock.setDate(stockDto.getDate());
 		newStock.setStockQuantity(stockDto.getQuantity());
+		
 		if(stockDto.getRecommendation() != null)
 			newStock.setRecommendation(ALGO_RECOMMENDATION.valueOf(stockDto.getRecommendation()));
 
@@ -182,6 +183,10 @@ public class PortfolioManager implements PortfolioManagerInterface {
 		}
 		
 		Stock stock = (Stock) inStock;
+		
+		if(stock.getRecommendation() == null)
+			stock.setRecommendation(ALGO_RECOMMENDATION.HOLD);
+		
 		return new StockDto(stock.getSymbol(), stock.getAsk(), stock.getBid(), 
 				stock.getDate(), stock.getStockQuantity(), stock.getRecommendation().name());
 	}
@@ -231,6 +236,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 		}
 		return ret;
 	}	
+	
 
 	/**
 	 * toDtoList - convert List of Stocks to list of Stock DTO
@@ -250,31 +256,41 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 	@Override
 	public void setTitle(String title) {
-		// TODO Auto-generated method stub
-		
+		Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.setTitle(title);
+		flush(portfolio);
 	}
 
 	@Override
 	public void updateBalance(float value) throws PortfolioException {
-		// TODO Auto-generated method stub
+		Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.updateBalance(value);
+		flush(portfolio);
 		
 	}
 
 	@Override
 	public void buyStock(String symbol, int quantity) throws PortfolioException {
-		// TODO Auto-generated method stub
+		/**Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.buyStock(stock, quantity);
+		flush(portfolio);*/
 		
 	}
 
 	@Override
 	public void sellStock(String symbol, int quantity) throws PortfolioException {
-		// TODO Auto-generated method stub
+		Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.sellStock(symbol, quantity);
+		flush(portfolio);
 		
 	}
 
 	@Override
 	public void removeStock(String symbol) throws PortfolioException {
-		// TODO Auto-generated method stub
+		Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.removeStock(symbol);
+		flush(portfolio);
 		
-	}	
+	}
+	
 }

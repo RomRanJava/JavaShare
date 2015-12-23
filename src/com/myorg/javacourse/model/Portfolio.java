@@ -26,7 +26,7 @@ public class Portfolio implements PortfolioInterface {
 		this(portfolio.getTitle());
 		this.portfolioSize=portfolio.getPortfolioSize();
 		for(int i=0; i<this.getPortfolioSize();i++){
-			this.stocks[i]=new Stock(portfolio.stocks[i]);
+			addStock((Stock)portfolio.stocks[i]);
 		}
 	}
 	
@@ -35,6 +35,7 @@ public class Portfolio implements PortfolioInterface {
 	}
 
 	public Portfolio(Stock[] stockArray) {
+		this();
 		for (int i = 0; i < MAX_PORTFOLIO_SIZE; i++){
 			this.stocks[i] = stockArray[i];	
 		}
