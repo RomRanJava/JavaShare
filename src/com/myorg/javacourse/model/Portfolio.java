@@ -1,5 +1,6 @@
 package com.myorg.javacourse.model;
 import org.algo.model.PortfolioInterface;
+import java.text.DecimalFormat;
 import org.algo.model.StockInterface;
 
 import com.myorg.javacourse.*;
@@ -36,7 +37,7 @@ public class Portfolio implements PortfolioInterface {
 
 	public Portfolio(Stock[] stockArray) {
 		this();
-		for (int i = 0; i < MAX_PORTFOLIO_SIZE; i++){
+		for (int i = 0; i<stockArray.length ; i++){
 			this.stocks[i] = stockArray[i];	
 		}
 	}
@@ -81,7 +82,7 @@ public class Portfolio implements PortfolioInterface {
 		{
 			for (int i = 0 ; i < this.getPortfolioSize(); i++)
 			{
-				if(stock.getSymbol() == this.stocks[i].getSymbol()){
+				if(stock.getSymbol().equals(this.stocks[i].getSymbol())){
 					return;
 				}
 			}
@@ -90,7 +91,7 @@ public class Portfolio implements PortfolioInterface {
 			this.portfolioSize++;
 		}
 		else
-			System.out.println("Can’t add new stock, portfolio can have only" + MAX_PORTFOLIO_SIZE + "stocks");
+			System.out.println("Can’t add new stock, portfolio can have only " + MAX_PORTFOLIO_SIZE + " stocks.");
 	}
 	
 	public Stock[] getStocks (){		
@@ -108,6 +109,10 @@ public class Portfolio implements PortfolioInterface {
 	public int getPortfolioSize() {
 		return portfolioSize;
 	}
+	
+	public void setPortfolioSize(int porttfolioSize) {
+		this.portfolioSize = porttfolioSize;	
+	}
 	/**
 	 * This method adds the amount to current balance (in case of buying stocks the amount can be negative also).
 	 * The method makes sure the balance should not become negative.
@@ -115,7 +120,7 @@ public class Portfolio implements PortfolioInterface {
 	 * @param amount
 	 */
 	public void updateBalance(float amount){
-		if (this.balance + amount > 0)
+		if (this.balance + amount >= 0)
 		{
 			this.balance += amount;
 		}
@@ -132,12 +137,13 @@ public class Portfolio implements PortfolioInterface {
 		boolean result = this.sellStock(stockSymbol, -1);
 		if(result){
 			for (int i = 0 ; i < this.getPortfolioSize(); i++){
-				if(stocks[i].getSymbol() == stockSymbol){
-					for (; i < this.getPortfolioSize(); i++)
+				if(stockSymbol.equals(stocks[i].getSymbol())){
+					for (; i < this.getPortfolioSize()-1; i++)
 					{
 						this.stocks[i] = this.stocks[i+1];
 					}
 					this.portfolioSize--;
+					this.stocks[getPortfolioSize()] = null;
 					return true;
 				}	
 			}
@@ -156,7 +162,7 @@ public class Portfolio implements PortfolioInterface {
 	public boolean sellStock(String stockSymbol, int quantity){
 		for (int i = 0 ; i < this.getPortfolioSize(); i++)
 		{
-			if(stocks[i].getSymbol() == stockSymbol){
+			if(stockSymbol.equals(stocks[i].getSymbol())){
 				if( quantity <= 0 && quantity != -1){
 					System.out.println("ERROR!");
 					return false;
@@ -189,8 +195,9 @@ public class Portfolio implements PortfolioInterface {
 	 * @param quantity
 	 * @return
 	 */
-	public boolean buyStock(Stock stock, int quantity){
+	public boolean buyStock(String symbol, int quantity){
 		int maxQuantity;
+		Stock stock = (Stock) this.findStock(symbol);
 		if (quantity <= 0 && quantity != -1){
 			System.out.println("ERROR!");
 			return false;
@@ -203,7 +210,7 @@ public class Portfolio implements PortfolioInterface {
 			}
 			for (int i = 0 ; i < this.getPortfolioSize(); i++)
 			{
-				if(this.stocks[i].getSymbol() == stock.getSymbol()){
+				if(this.stocks[i].getSymbol().equals(stock.getSymbol())){
 					if (quantity == -1){
 						((Stock) this.stocks[i]).setStockQuantity(((Stock) this.stocks[i]).getStockQuantity()+ maxQuantity);
 						this.updateBalance(-(maxQuantity*stock.getAsk()));
@@ -268,12 +275,14 @@ public class Portfolio implements PortfolioInterface {
 	public StockInterface findStock(String symbol) {	
 		for (int i = 0; i< this.getPortfolioSize(); i++){
 			
-			if (this.stocks[i].getSymbol() == symbol)
+			if (symbol.equals(this.stocks[i].getSymbol()))
 			{
 				return this.stocks[i];
 			}
 		}
 		return null;
 	}
+
+	
 
 }

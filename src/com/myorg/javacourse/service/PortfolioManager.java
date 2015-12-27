@@ -1,5 +1,6 @@
 package com.myorg.javacourse.service;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -226,9 +227,18 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 			Stock[] stockArray = stockList.toArray(new Stock[stockList.size()]);
 			ret = new Portfolio(stockArray);
+			int stockCounter = 0;
+			for (StockInterface s : ret.getStocks()){
+				if(s != null)
+				{
+					stockCounter++;
+				}
+			}
+			ret.setPortfolioSize(stockCounter);
 		}
 
 		ret.setTitle(dto.getTitle());
+		
 		try {
 			ret.updateBalance(dto.getBalance());
 		} catch (Exception e) {
@@ -271,9 +281,9 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 	@Override
 	public void buyStock(String symbol, int quantity) throws PortfolioException {
-		/**Portfolio portfolio = (Portfolio) getPortfolio();
-		portfolio.buyStock(stock, quantity);
-		flush(portfolio);*/
+		Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.buyStock(symbol, quantity);
+		flush(portfolio);
 		
 	}
 

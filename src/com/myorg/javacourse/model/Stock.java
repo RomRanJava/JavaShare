@@ -1,5 +1,6 @@
 package com.myorg.javacourse.model;
 import com.myorg.javacourse.model.Portfolio;
+import java.text.DecimalFormat;
 import com.myorg.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 
 import java.text.SimpleDateFormat;
@@ -17,7 +18,6 @@ public class Stock implements StockInterface {
 	private int stockQuantity;
 	private ALGO_RECOMMENDATION recommendation;
 	
-	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 	Date date = new Date();
 	/**
 	 * a constructor that create stock instens after getting the values  
@@ -87,7 +87,8 @@ public class Stock implements StockInterface {
 		this.stockQuantity = stockQuantity;
 	}
 
-	public String getHtmlDescription(){		
+	public String getHtmlDescription(){	
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		String stringStr = ("<b>Stock symbol</b>:" + getSymbol() + "," + "<b> ask</b>:" + getAsk()
 						+ ","  + "<b> bid</b>:" + getBid() + ","  + "<b> date</b>:" + df.format(getDate()) + "<b> Stock quantity</b>:" + getStockQuantity());
 				
