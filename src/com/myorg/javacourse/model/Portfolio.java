@@ -125,21 +125,21 @@ public class Portfolio implements PortfolioInterface {
 	 * 
 	 * @param amount
 	 */
-	public void updateBalance(float amount){
-		try{
-			if (this.balance + amount < 0) throw new BalanceException();
-			this.balance += amount;
-		}catch (BalanceException be) {
-			System.out.println("Your balance is not enough to buy new stocks.");
-		}
+	public void updateBalance(float amount) throws BalanceException{
+
+			if (this.balance + amount >= 0){
+				this.balance += amount;}
+			else 
+				throw new BalanceException("Your balance is not enough to buy new stocks.");
 	}
 	/**
 	 * This method removes a stock from the stocks array in the portfolio.
 	 * 
 	 * @param stockSymbol
 	 * @return
+	 * @throws BalanceException 
 	 */
-	public void removeStock(String stockSymbol){
+	public void removeStock(String stockSymbol) throws BalanceException{
 		for (int i = 0 ; i < this.getPortfolioSize(); i++){
 			try{
 				if(!stockSymbol.equals(stocks[i].getSymbol())) throw new StockNotExistException();
@@ -163,8 +163,9 @@ public class Portfolio implements PortfolioInterface {
 	 * @param stockSymbol
 	 * @param quantity
 	 * @return
+	 * @throws BalanceException 
 	 */
-	public void sellStock(String stockSymbol, int quantity){
+	public void sellStock(String stockSymbol, int quantity) throws BalanceException{
 		for (int i = 0 ; i < this.getPortfolioSize(); i++)
 		{
 			try{
@@ -200,8 +201,9 @@ public class Portfolio implements PortfolioInterface {
 	 * @param stock
 	 * @param quantity
 	 * @return
+	 * @throws BalanceException 
 	 */
-	public boolean buyStock(String symbol, int quantity){
+	public boolean buyStock(String symbol, int quantity) throws BalanceException{
 		int maxQuantity;
 		Stock stock = (Stock) this.findStock(symbol);
 		if (quantity <= 0 && quantity != -1){
