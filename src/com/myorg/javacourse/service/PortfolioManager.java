@@ -19,6 +19,8 @@ import org.algo.service.MarketService;
 import org.algo.service.PortfolioManagerInterface;
 import org.algo.service.ServiceManager;
 
+import com.myorg.javacourse.exception.PortfolioFullException;
+import com.myorg.javacourse.exception.StockAlreadyExistsException;
 import com.myorg.javacourse.model.Portfolio;
 import com.myorg.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 import com.myorg.javacourse.model.Stock;
@@ -122,9 +124,11 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 	/**
 	 * Add stock to portfolio 
+	 * @throws StockAlreadyExistsException 
+	 * @throws PortfolioFullException 
 	 */
 	@Override
-	public void addStock(String symbol) {
+	public void addStock(String symbol) throws PortfolioFullException, StockAlreadyExistsException {
 		Portfolio portfolio = (Portfolio) getPortfolio();
 
 		try {
